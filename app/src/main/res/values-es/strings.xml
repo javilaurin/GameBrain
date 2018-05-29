@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">GameBrain</string>
     <string name="action_settings">Ajustes</string>
@@ -6,9 +7,6 @@
     <string name="platforms_button_text">Plataformas</string>
     <string name="developers_button_text">Devs</string>
     <string name="genres_button_text">Géneros</string>
-    <string name="title_item_list">Items</string>
-    <string name="title_item_detail">Item Detail</string>
     <string name="action_about">Acerca de</string>
-    <string name="action_about_text">Aplicación creada por LaurinWare Co.\nUtiliza la API de IGDB (www.igdb.com)</string>
-
+    <string name="action_about_text">Creado por LaurinWare Co.\\Utiliza la API de IGDB (www.igdb.com)</string>
 </resources>

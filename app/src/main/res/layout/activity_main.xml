@@ -48,7 +48,7 @@
                 android:id="@+id/button_games"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="5"
+                android:layout_weight="2"
                 android:text="@string/games_button_text"
                 android:textSize="18sp" />
 
@@ -72,7 +72,7 @@
                 android:id="@+id/button_genres"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="5"
+                android:layout_weight="2"
                 android:text="@string/genres_button_text"
                 android:textSize="18sp" />
 
