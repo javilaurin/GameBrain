@@ -9,4 +9,6 @@
     <string name="genres_button_text">Géneros</string>
     <string name="action_about">Acerca de</string>
     <string name="action_about_text">Creado por LaurinWare Co.\\Utiliza la API de IGDB (www.igdb.com)</string>
+    <string name="action_searching">Buscando...</string>
+    <string name="search_game_hint">Busca un juego...</string>
 </resources>

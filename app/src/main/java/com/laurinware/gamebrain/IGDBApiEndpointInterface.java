@@ -12,6 +12,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface IGDBApiEndpointInterface {
 
@@ -24,13 +25,13 @@ public interface IGDBApiEndpointInterface {
     Call<ArrayList<Game>> getAllGames();
 
     @Headers({"user-key: 65b027ed363c5f179d4bdef0da2fc91f", "Accept:application/json"})
-    @GET("/games/{id}?fields=id,name,developers")
+    @GET("/games/{id}")
     Call<ArrayList<Game>> getGameByID(@Path("id") int id);
 
     @Headers({"user-key:" + API_user_key, "accept:application/json"})
-    @GET("/games/?search={search_query}")
-    Call<ArrayList<Game>> searchGame(@Path("search_query") String search_query);
-    // Admitiría /games/?search=Halo&fields=name,publishers
+    @GET("/games/")
+    Call<ArrayList<Game>> searchGame(@Query("search") String search_query);
+    // TODO add cover
 
 
     @Headers({"user-key: 65b027ed363c5f179d4bdef0da2fc91f", "Accept: application/json"})

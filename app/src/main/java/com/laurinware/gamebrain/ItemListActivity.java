@@ -1,9 +1,12 @@
 package com.laurinware.gamebrain;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -13,6 +16,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
@@ -46,6 +52,9 @@ public class ItemListActivity extends AppCompatActivity {
 
     GameBrainRepository repo;
     private List<Game> mGameList;
+
+    EditText searcher;
+    Button searchButton;
 
     private int listMode = 0; // 0:Generic, 1:Games, 2:Platforms
 
@@ -181,7 +190,6 @@ public class ItemListActivity extends AppCompatActivity {
                 return null;
             }
         };
-        repo = new GameBrainRepository(this.getApplication());
 
         // Initialize toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -202,12 +210,39 @@ public class ItemListActivity extends AppCompatActivity {
             mTwoPane = true;
         }
 
-        // Obtain game list
-
-        View recyclerView = findViewById(R.id.item_list);
+        final View recyclerView = findViewById(R.id.item_list);
         assert recyclerView != null;
         setupRecyclerView((RecyclerView) recyclerView);
 
+        searcher = (EditText) findViewById(R.id.search_game_editText);
+        searchButton = (Button) findViewById(R.id.search_game_button);
+
+
+        repo = ViewModelProviders.of(this).get(GameBrainRepository.class);
+
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Code here executes on main thread after user presses button
+                String searchQuery = searcher.getText().toString();
+                Log.d("SEARCH","value: " + searchQuery);
+
+                Toast.makeText(v.getContext(),R.string.action_searching, Toast.LENGTH_SHORT).show();
+
+                setGameObserver(searchQuery,recyclerView);
+
+            }
+        });
+
+    }
+
+    public void setGameObserver(String searchQuery, final View recyclerView){
+        repo.getSearchedGames(searchQuery).observe(this, new Observer<List<Game>>(){
+            @Override
+            public void onChanged(List<Game> games) {
+                mGameList = games;
+                setupRecyclerView((RecyclerView) recyclerView);
+            }
+        });
     }
 
     @Override
@@ -228,7 +263,7 @@ public class ItemListActivity extends AppCompatActivity {
     }
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
-                recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(this, mGameList, mTwoPane));
+            recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(this, mGameList, mTwoPane));
     }
 
     public static class SimpleItemRecyclerViewAdapter

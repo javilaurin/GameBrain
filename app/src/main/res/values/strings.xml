@@ -10,5 +10,7 @@
     <string name="title_item_detail">Item Detail</string>
     <string name="action_about">Acerca de</string>
     <string name="action_about_text">Aplicación creada por LaurinWare Co.\nUtiliza la API de IGDB (www.igdb.com)</string>
+    <string name="action_searching">Buscando...</string>
+    <string name="search_game_hint">Busca un juego...</string>
 
 </resources>
